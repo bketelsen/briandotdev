@@ -21,7 +21,7 @@ const adapter = s3Adapter({
 })
 
 export default buildConfig({
-  serverURL: 'http://localhost:4000',
+  serverURL: process.env.SERVER_URL,
   admin: {
     user: Users.slug,
   },
