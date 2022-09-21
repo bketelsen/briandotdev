@@ -40,7 +40,7 @@ const Pages = {
     {
       name: 'layout', // required
       type: 'blocks', // required
-      minRows: 1,
+      minRows: 0,
       blocks: [ // required
        QuoteBlock,
        ContentBlock,

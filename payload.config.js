@@ -4,6 +4,7 @@ import Pages from './collections/Pages';
 import Posts from './collections/Posts';
 import Tags from './collections/Tags';
 import Users from './collections/Users';
+import Site from './globals/site';
 import { buildConfig } from 'payload/config';
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
 import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3';
@@ -32,6 +33,9 @@ export default buildConfig({
     Tags,
     Users,
     Media,
+  ],
+  globals: [
+    Site
   ],
   plugins: [
     cloudStorage({

@@ -3,6 +3,11 @@ const Site = {
   slug: 'site',
   fields: [
     {
+      name: 'primaryAuthor',
+      type: 'relationship',
+      relationTo: 'users'
+    },
+    {
         name: 'copyright',
         type: 'text',
     },
@@ -13,38 +18,6 @@ const Site = {
     {
         name: 'metaDescription',
         type: 'textarea',
-    },
-    {
-      name: 'socials',
-      label: 'Social Links',
-      type: 'group',
-      fields: [
-        {
-          name: 'twitter',
-          label: 'Twitter Link',
-          type: 'text',
-        },
-        {
-          name: 'github',
-          label: 'GitHub Link',
-          type: 'text',
-        },
-        {
-          name: 'linkedin',
-          label: 'LinkedIn Link',
-          type: 'text',
-        },
-        {
-          name: 'twitch',
-          label: 'Twitch Link',
-          type: 'text',
-        },
-        {
-          name: 'youtube',
-          label: 'YouTube Link',
-          type: 'text',
-        },
-      ],
     },
   ],
 };

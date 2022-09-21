@@ -8,87 +8,14 @@
 export interface Config {}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
+ * via the `definition` "site".
  */
-export interface Category {
+export interface Site {
   id: string;
-  name?: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: string;
-  title?: string;
-  summary?: string;
-  slug?: string;
-  author?: string | User;
-  publishedDate?: string;
-  category?: string | Category;
-  tags?: (string | Tag)[];
-  layout: (
-    | {
-        quoteHeader?: string;
-        quoteText: string;
-        referenceName?: string;
-        referenceURL?: string;
-        id?: string;
-        blockName?: string;
-        blockType: 'Quote';
-      }
-    | {
-        content?: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'Content';
-      }
-    | {
-        title?: string;
-        content?: string;
-        link?: string;
-        id?: string;
-        blockName?: string;
-        blockType: 'CTA';
-      }
-    | {
-        title?: string;
-        content?: string;
-        link?: string;
-        id?: string;
-        blockName?: string;
-        blockType: 'Bookmark';
-      }
-    | {
-        media: string | Media;
-        size?: 'normal' | 'wide' | 'fullscreen';
-        caption?: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'media';
-      }
-    | {
-        fileName?: string;
-        language?: 'go' | 'rust' | 'js' | 'bash';
-        highlight?: string;
-        code?: string;
-        id?: string;
-        blockName?: string;
-        blockType: 'Code';
-      }
-  )[];
-  status?: 'draft' | 'published';
-  meta: {
-    title?: string;
-    description?: string;
-    image?: string | Media;
-  };
-  createdAt: string;
-  updatedAt: string;
+  primaryAuthor?: string | User;
+  copyright?: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -97,6 +24,15 @@ export interface Post {
 export interface User {
   id: string;
   name?: string;
+  avatar?: string | Media;
+  portrait?: string | Media;
+  socials: {
+    twitter?: string;
+    github?: string;
+    linkedin?: string;
+    twitch?: string;
+    youtube?: string;
+  };
   email?: string;
   resetPasswordToken?: string;
   resetPasswordExpiration?: string;
@@ -104,14 +40,6 @@ export interface User {
   lockUntil?: string;
   createdAt: string;
   updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags".
- */
-export interface Tag {
-  id: string;
-  name?: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -157,6 +85,149 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  name?: string;
+  slug?: string;
+  description?: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: string;
+  title?: string;
+  summary?: string;
+  slug?: string;
+  author?: string | User;
+  publishedDate?: string;
+  category?: string | Category;
+  tags?: (string | Tag)[];
+  layout: (
+    | {
+        quoteHeader?: string;
+        quoteText: string;
+        referenceName?: string;
+        referenceURL?: string;
+        id?: string;
+        blockName?: string;
+        blockType: 'quote';
+      }
+    | {
+        content: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'content';
+      }
+    | {
+        question?: string;
+        action: string;
+        content?: string;
+        actionLink?: string;
+        actionText?: string;
+        infoLink?: string;
+        infoText?: string;
+        media?: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'cta';
+      }
+    | {
+        title?: string;
+        content?: string;
+        link: string;
+        media?: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'bookmark';
+      }
+    | {
+        media: string | Media;
+        size?: 'normal' | 'wide' | 'fullscreen';
+        caption?: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'media';
+      }
+    | {
+        fileName?: string;
+        language?:
+          | 'go'
+          | 'rust'
+          | 'js'
+          | 'bash'
+          | 'python'
+          | 'html'
+          | 'css'
+          | 'md'
+          | 'json'
+          | 'yaml'
+          | 'graphql'
+          | 'docker'
+          | 'ts'
+          | 'nix';
+        highlight?: string;
+        code: string;
+        id?: string;
+        blockName?: string;
+        blockType: 'code';
+      }
+    | {
+        title?: string;
+        admonitionText: string;
+        icon?: 'info' | 'warning' | 'danger' | 'note' | 'hint' | 'idea';
+        id?: string;
+        blockName?: string;
+        blockType: 'admonition';
+      }
+    | {
+        category?: string;
+        title: string;
+        body?: string;
+        media?: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'header';
+      }
+    | {
+        gallery: {
+          image: string | Media;
+          caption?: string;
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'gallery';
+      }
+  )[];
+  status?: 'draft' | 'published';
+  meta: {
+    title?: string;
+    description?: string;
+    image?: string | Media;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  name?: string;
+  slug?: string;
+  description?: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -173,31 +244,37 @@ export interface Page {
         referenceURL?: string;
         id?: string;
         blockName?: string;
-        blockType: 'Quote';
+        blockType: 'quote';
       }
     | {
-        content?: {
+        content: {
           [k: string]: unknown;
         }[];
         id?: string;
         blockName?: string;
-        blockType: 'Content';
+        blockType: 'content';
+      }
+    | {
+        question?: string;
+        action: string;
+        content?: string;
+        actionLink?: string;
+        actionText?: string;
+        infoLink?: string;
+        infoText?: string;
+        media?: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'cta';
       }
     | {
         title?: string;
         content?: string;
-        link?: string;
+        link: string;
+        media?: string | Media;
         id?: string;
         blockName?: string;
-        blockType: 'CTA';
-      }
-    | {
-        title?: string;
-        content?: string;
-        link?: string;
-        id?: string;
-        blockName?: string;
-        blockType: 'Bookmark';
+        blockType: 'bookmark';
       }
     | {
         media: string | Media;
@@ -211,12 +288,53 @@ export interface Page {
       }
     | {
         fileName?: string;
-        language?: 'go' | 'rust' | 'js' | 'bash';
+        language?:
+          | 'go'
+          | 'rust'
+          | 'js'
+          | 'bash'
+          | 'python'
+          | 'html'
+          | 'css'
+          | 'md'
+          | 'json'
+          | 'yaml'
+          | 'graphql'
+          | 'docker'
+          | 'ts'
+          | 'nix';
         highlight?: string;
-        code?: string;
+        code: string;
         id?: string;
         blockName?: string;
-        blockType: 'Code';
+        blockType: 'code';
+      }
+    | {
+        category?: string;
+        title: string;
+        body?: string;
+        media?: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'header';
+      }
+    | {
+        title?: string;
+        admonitionText: string;
+        icon?: 'info' | 'warning' | 'danger' | 'note' | 'hint' | 'idea';
+        id?: string;
+        blockName?: string;
+        blockType: 'admonition';
+      }
+    | {
+        gallery: {
+          image: string | Media;
+          caption?: string;
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'gallery';
       }
   )[];
   meta: {
