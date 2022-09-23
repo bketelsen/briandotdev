@@ -1,6 +1,10 @@
 
 const Site = {
   slug: 'site',
+  access: {
+    // Payload's access control functions apply to files also, meaning you can permit or deny file downloads easily
+    read: () => true,
+  },
   fields: [
     {
       name: 'primaryAuthor',
